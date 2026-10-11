@@ -4,6 +4,10 @@ const Matter=root.Matter||(typeof require==='function'?require('./vendor/matter-
 const {Engine,Bodies,Body,Composite}=Matter;
 const RADII=[17,23,29,36,44,53,63,74,86,100,116];
 const GROW_TIME=.14;
+// Polygon sides per level so each edge sits within 0.15 px of the true circle (24 sides minimum).
+// Small circles need far fewer than 64 sides, which keeps narrow-phase collision cheap.
+// Even counts let Matter.js share each pair of parallel separating axes.
+const SIDES=RADII.map(r=>Math.max(24,2*Math.ceil(Math.PI/Math.acos(1-.15/r)/2)));
 class Physics {
  constructor(onMerge=()=>{}) {
   this.onMerge=onMerge;this.width=440;this.height=610;this.seq=0;
@@ -24,8 +28,7 @@ class Physics {
  add(level,x,y,vx=0,vy=0,initialRadius=RADII[level]) {
   if(!Number.isInteger(level)||level<0||level>=RADII.length)throw new RangeError('Invalid circle level');
   const r=Math.min(initialRadius,RADII[level]);
-  // Fine circle approximation prevents small circles catching on polygon corners.
-  const body=Bodies.polygon(Math.max(r+2,Math.min(this.width-r-2,x)),Math.min(this.height-r-3,y),64,r,{
+  const body=Bodies.polygon(Math.max(r+2,Math.min(this.width-r-2,x)),Math.min(this.height-r-3,y),SIDES[level],r,{
    label:'photo',density:.001,friction:.055,frictionStatic:.12,frictionAir:.0025,
    restitution:.22,slop:.025
   });
@@ -53,6 +56,7 @@ class Physics {
    Body.scale(b.body,radius/b.r,radius/b.r);b.r=radius;
   }
   Engine.update(this.engine,dt*1000);
+  this._contain();
   const live=new Set(this.balls),used=new Set(),merges=[];
   // Merge after solving, once per body, including resting contact pairs.
   for(const pair of this.engine.pairs.list){
@@ -73,6 +77,18 @@ class Physics {
     const c=this.add(a.level+1,x,y,vx,vy,a.r);
     Body.setAngularVelocity(c.body,spin);this.onMerge(c);
    }
+  }
+ }
+ // Heavy piles can squeeze small circles through the solver's soft wall contacts; push them back inside.
+ _contain() {
+  const tol=.5,left=2,right=this.width-2,floor=607;
+  for(const b of this.balls){
+   const body=b.body,r=b.r;let x=b.x,y=b.y;
+   if(x-r<left-tol)x=left+r-tol/2;else if(x+r>right+tol)x=right-r+tol/2;
+   if(y+r>floor+tol)y=floor-r+tol/2;
+   if(x===b.x&&y===b.y)continue;
+   const v=body.velocity;Body.setPosition(body,{x,y});
+   Body.setVelocity(body,{x:x!==b.x&&Math.sign(v.x)!==Math.sign(x-b.x)?0:v.x,y:y!==b.y&&v.y>0?0:v.y});
   }
  }
  overflow(){return this.balls.some(b=>this.time-b.born>1.5&&b.y-b.r<93&&Math.abs(b.vy)<100);}

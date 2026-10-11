@@ -1,6 +1,6 @@
 # Photo Melon｜合成我的臉：原始碼與開發交接
 
-這份套件包含目前可玩版本的完整 HTML、CSS、JavaScript、Matter.js 與物理測試，另附繁體中文技術文件。遊戲程式以來源版本 `7a665924d388caa8d543e706be13114973f538ec`（2026-10-11，關閉自動休眠的版本）為基礎，之後修正了照片裁切與高解析度繪製；`SOURCE_VERSION.json` 記錄的是原始快照的雜湊，不再對應目前的 `dist/app.js` 與 `dist/index.html`。
+這份套件包含目前可玩版本的完整 HTML、CSS、JavaScript、Matter.js 與物理測試，另附繁體中文技術文件。遊戲程式以來源版本 `7a665924d388caa8d543e706be13114973f538ec`（2026-10-11，關閉自動休眠的版本）為基礎，之後修正了照片裁切、高解析度繪製，並優化物理碰撞效能與牆壁穿透；`SOURCE_VERSION.json` 記錄的是原始快照的雜湊，不再對應目前的 `dist/app.js` 與 `dist/index.html`。
 
 ## 1. 在 Windows 電腦執行
 
@@ -39,7 +39,7 @@ macOS / Linux 常使用 `python3` 取代 `python`。
 | `dist/app.js` | 遊戲流程、Canvas 繪製、照片裁切、儲存與音效 |
 | `dist/vendor/matter-0.20.0.min.js` | 已包含的 Matter.js 0.20.0 |
 | `dist/vendor/MATTER-LICENSE.txt` | Matter.js 的 MIT 授權 |
-| `tests/physics.cjs` | 12 項 Node.js 物理與規則測試 |
+| `tests/physics.cjs` | 13 項 Node.js 物理與規則測試 |
 | `start-local.cjs` | 只監聽本機的靜態 HTTP 伺服器 |
 | `start-local.bat` | Windows 啟動入口 |
 

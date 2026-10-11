@@ -73,3 +73,14 @@ test('eight varied piles remain stable with subpixel overlap and no escaped circ
   for(const b of p.balls){assert([b.x,b.y,b.vx,b.vy,b.angle].every(Number.isFinite));assert(b.y+b.r<607.4);assert(b.x-b.r>1.6&&b.x+b.r<438.4);}
  }
 });
+test('heavy piles never squeeze circles into the walls or floor',()=>{
+ for(const seed of [1,3,12]){
+  let state=seed,worst=0;const rand=()=>((state=(1664525*state+1013904223)>>>0)/4294967296);
+  const p=new Physics(),level=()=>{const v=rand();return v<.4?0:v<.7?1:v<.9?2:3;};
+  for(let j=0;j<120&&!p.balls.some(b=>p.time-b.born>1.5&&b.y-b.r<93);j++){
+   p.add(level(),20+rand()*400,43);
+   for(let i=0;i<60;i++){p.step(1/120);for(const b of p.balls)worst=Math.max(worst,2-(b.x-b.r),b.x+b.r-438,b.y+b.r-607);}
+  }
+  assert(worst<.6,`seed ${seed}: a circle sank ${worst.toFixed(2)} px into the container`);
+ }
+});
