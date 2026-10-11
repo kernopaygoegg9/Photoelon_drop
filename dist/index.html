@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f4ec"><meta name="description" content="把自拍、朋友或寵物照片變成你的專屬西瓜合成遊戲。上傳、裁切、開始合成！">
+<title>合成我的臉 — Photo Melon</title>
+<link rel="stylesheet" href="style.css"><script src="vendor/matter-0.20.0.min.js" defer></script><script src="game.js?v=3" defer></script><script src="app.js?v=3" defer></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="./"><span class="brand-icon">◕</span><span>PHOTO MELON<small>合成我的臉</small></span></a><div class="top-note"><span class="dot"></span>你的照片，你的遊戲</div><button class="icon-btn" id="sound" aria-label="開啟音效" title="開啟音效">♪</button></header>
+<main>
+<section class="intro"><div class="eyebrow">A LITTLE CHAOS. A LOT OF YOU.</div><h1>這次，合成<span>你自己。</span><span class="spark">✳</span></h1><p>一張自拍，無限笑點。把照片丟進去，看自己越合越大。</p></section>
+<div class="workspace">
+<section class="game-column" aria-label="遊戲區">
+<div class="game-toolbar"><div><span class="micro">SCORE</span><strong id="score">0</strong></div><div class="best"><span class="micro">BEST</span><strong id="best">0</strong></div><div class="next"><span class="micro">下一顆</span><canvas id="next" width="64" height="64" aria-label="下一顆圖片"></canvas></div><button class="icon-btn" id="pause" aria-label="暫停遊戲" title="暫停">Ⅱ</button><button class="icon-btn" id="restart" aria-label="重新開始" title="重新開始">↻</button></div>
+<div class="board-wrap"><div class="board-top"><span>DROP SOME PERSONALITY</span><span>↓</span></div><canvas id="board" width="440" height="610" tabindex="0" aria-label="合成遊戲。滑動瞄準，放開投下；鍵盤左右移動，空白鍵投下。"></canvas><div id="overlay" class="overlay" hidden><div class="overlay-card"><span id="overlay-icon">✳</span><h2 id="overlay-title">休息一下</h2><p id="overlay-desc">你的下一顆正在等你。</p><button id="overlay-action" class="primary">繼續合成 →</button></div></div></div>
+<div class="board-footer"><span><b>↔</b> 滑動瞄準，放開投下</span><span>同圖碰撞 <b>＝</b> 升級</span></div><div id="live" class="sr-only" aria-live="polite"></div>
+</section>
+<aside class="studio">
+<div class="studio-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h2>你的合成素材</h2></div><span class="sticker">100%<br>你的風格</span></div>
+<div class="upload-zone" id="upload-zone"><div class="upload-icon">↥</div><h3>從一張照片開始</h3><p>自拍、毛小孩、朋友的迷因照<br>都可以成為你的下一顆「西瓜」。</p><button class="primary" id="upload-main">＋ 上傳照片</button><span class="file-note">JPG / PNG / WEBP · 最大 15 MB</span></div>
+<input type="file" id="photo-input" accept="image/jpeg,image/png,image/webp" hidden>
+<div class="steps-heading"><h3>合成進化表 <span>11 階</span></h3><button class="text-btn" id="reset-theme">恢復預設</button></div>
+<p class="studio-hint">點選一顆，更換照片或圈選部位。<br>上傳一張照片後，各階都能單獨調整。</p>
+<div id="levels" class="levels"></div>
+<div class="studio-actions"><button class="secondary" id="save-theme">✓ 儲存我的素材</button><button class="secondary compact" id="capture" title="下載遊戲畫面" aria-label="下載遊戲畫面">▣</button></div>
+<div class="privacy"><span>⌁</span><p>照片在你的瀏覽器中處理，不會傳到伺服器。<br>儲存後，下次用同一瀏覽器就能繼續使用。</p></div>
+</aside>
+</div>
+<section class="how"><div><span>01</span><h3>挑一張有趣的照片</h3><p>一張自拍就能開始，也可以每階都不同。</p></div><div><span>02</span><h3>圈選你的合成素材</h3><p>眼睛 → 鼻子 → 嘴巴 → 整張臉，自由排列。</p></div><div><span>03</span><h3>讓兩個你，變成更大的你</h3><p>相同階級碰撞合成。別讓照片堆過虛線！</p></div></section>
+</main>
+<footer><span>PHOTO MELON</span><p>一點物理，一點混亂，一大堆你的臉。</p><span>MADE FOR FUN ✳</span></footer>
+<dialog id="crop-modal"><div class="modal-heading"><div><span class="eyebrow">THE PERFECT LITTLE CIRCLE</span><h2 id="crop-title">圈出你的素材</h2></div><button id="crop-close" class="icon-btn" aria-label="關閉裁切視窗">×</button></div><p>拖曳照片調整位置，拉動滑桿放大。</p><canvas id="crop" width="400" height="400" aria-label="照片裁切預覽，可拖曳照片"></canvas><label class="zoom-label">縮放 <input id="zoom" type="range" min="1" max="5" step="0.01" value="1"><span id="zoom-value">1.0×</span></label><div class="crop-actions"><button class="secondary" id="crop-replace">換一張照片</button><button class="primary" id="crop-apply">套用這個圈選 →</button></div><p class="crop-note" id="crop-note"></p></dialog>
+<dialog id="confirm-modal"><h2 id="confirm-title">重新開始？</h2><p id="confirm-desc">目前的分數會歸零，你的照片素材會保留。</p><div class="crop-actions"><button class="secondary" id="confirm-cancel">取消</button><button class="primary" id="confirm-ok">重新開始</button></div></dialog>
+<div id="toast" role="status" class="toast" hidden></div>
+</body></html>

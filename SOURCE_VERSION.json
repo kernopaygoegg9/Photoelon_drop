@@ -1,0 +1,35 @@
+{
+  "source_commit": "7a665924d388caa8d543e706be13114973f538ec",
+  "snapshot_date": "2026-10-11",
+  "game_revision": "physics-v3-no-automatic-sleeping",
+  "files": [
+    {
+      "path": "dist/app.js",
+      "sha256": "bdaeb8337f764bbdef658bbd1ec87c712b15c4eba608a47017520dee37b81f94"
+    },
+    {
+      "path": "dist/game.js",
+      "sha256": "eec01f42ccb9222556e071788cd55cd80966b2ea614191c12bc792d242dc1b34"
+    },
+    {
+      "path": "dist/index.html",
+      "sha256": "d1921253d1bfcc0c8b55a1004719fdd7c4ee3680fe1fe3e1579cc35deb564ddb"
+    },
+    {
+      "path": "dist/style.css",
+      "sha256": "6b024b8780e8de541ba9b8a698a087d1b3b3783f85121499ab3aea218a93d4e1"
+    },
+    {
+      "path": "dist/vendor/MATTER-LICENSE.txt",
+      "sha256": "ed182087be5b26734aa6d4789743de3a97417950e8c1e3ff2e3d19c6462720d3"
+    },
+    {
+      "path": "dist/vendor/matter-0.20.0.min.js",
+      "sha256": "72d30be0f579eb02ce1e0b6f9d359a4f392e6837e5a26ba8be5dbee7f88e24ae"
+    },
+    {
+      "path": "tests/physics.cjs",
+      "sha256": "b896d0a0d31a2bf02c3e5f50185fa97cd60ecf800b8c772c807f9504f45b4fa4"
+    }
+  ]
+}
