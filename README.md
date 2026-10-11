@@ -1,6 +1,6 @@
 # Photo Melon｜合成我的臉：原始碼與開發交接
 
-這份套件包含目前可玩版本的完整 HTML、CSS、JavaScript、Matter.js 與物理測試，另附繁體中文技術文件。遊戲程式對應來源版本 `7a665924d388caa8d543e706be13114973f538ec`（2026-10-11，關閉自動休眠的版本）。
+這份套件包含目前可玩版本的完整 HTML、CSS、JavaScript、Matter.js 與物理測試，另附繁體中文技術文件。遊戲程式以來源版本 `7a665924d388caa8d543e706be13114973f538ec`（2026-10-11，關閉自動休眠的版本）為基礎，之後修正了照片裁切與高解析度繪製；`SOURCE_VERSION.json` 記錄的是原始快照的雜湊，不再對應目前的 `dist/app.js` 與 `dist/index.html`。
 
 ## 1. 在 Windows 電腦執行
 
@@ -63,7 +63,7 @@ node --test tests/physics.cjs
 | 投球概率 | `dist/app.js`：`randomLevel()` |
 | 投球間隔 | `dist/app.js`：`drop()` 與預覽透明度判斷 |
 | 分數規則 | `dist/app.js`：`onMerge()` |
-| 上傳大小與圖像解析度 | `dist/app.js`：`loadFile()`、`cropOutput()` |
+| 上傳大小與圖像解析度 | `dist/app.js`：`loadFile()`、`renderTile()`、`TILE` |
 | 存檔格式 | `dist/app.js`：`save-theme` 事件與 `restoreTheme()` |
 
 球階數、畫布大小與危險線目前涉及多處固定值；修改前請閱讀 `TECHNICAL.md` 的同步修改清單。

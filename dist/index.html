@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7f4ec"><meta name="description" content="把自拍、朋友或寵物照片變成你的專屬西瓜合成遊戲。上傳、裁切、開始合成！">
 <title>合成我的臉 — Photo Melon</title>
-<link rel="stylesheet" href="style.css"><script src="vendor/matter-0.20.0.min.js" defer></script><script src="game.js?v=3" defer></script><script src="app.js?v=3" defer></script>
+<link rel="stylesheet" href="style.css"><script src="vendor/matter-0.20.0.min.js" defer></script><script src="game.js?v=4" defer></script><script src="app.js?v=4" defer></script>
 </head>
 <body>
 <header class="topbar"><a class="brand" href="./"><span class="brand-icon">◕</span><span>PHOTO MELON<small>合成我的臉</small></span></a><div class="top-note"><span class="dot"></span>你的照片，你的遊戲</div><button class="icon-btn" id="sound" aria-label="開啟音效" title="開啟音效">♪</button></header>
@@ -30,7 +30,7 @@
 <section class="how"><div><span>01</span><h3>挑一張有趣的照片</h3><p>一張自拍就能開始，也可以每階都不同。</p></div><div><span>02</span><h3>圈選你的合成素材</h3><p>眼睛 → 鼻子 → 嘴巴 → 整張臉，自由排列。</p></div><div><span>03</span><h3>讓兩個你，變成更大的你</h3><p>相同階級碰撞合成。別讓照片堆過虛線！</p></div></section>
 </main>
 <footer><span>PHOTO MELON</span><p>一點物理，一點混亂，一大堆你的臉。</p><span>MADE FOR FUN ✳</span></footer>
-<dialog id="crop-modal"><div class="modal-heading"><div><span class="eyebrow">THE PERFECT LITTLE CIRCLE</span><h2 id="crop-title">圈出你的素材</h2></div><button id="crop-close" class="icon-btn" aria-label="關閉裁切視窗">×</button></div><p>拖曳照片調整位置，拉動滑桿放大。</p><canvas id="crop" width="400" height="400" aria-label="照片裁切預覽，可拖曳照片"></canvas><label class="zoom-label">縮放 <input id="zoom" type="range" min="1" max="5" step="0.01" value="1"><span id="zoom-value">1.0×</span></label><div class="crop-actions"><button class="secondary" id="crop-replace">換一張照片</button><button class="primary" id="crop-apply">套用這個圈選 →</button></div><p class="crop-note" id="crop-note"></p></dialog>
+<dialog id="crop-modal"><div class="modal-heading"><div><span class="eyebrow">THE PERFECT LITTLE CIRCLE</span><h2 id="crop-title">圈出你的素材</h2></div><button id="crop-close" class="icon-btn" aria-label="關閉裁切視窗">×</button></div><p>拖曳照片調整位置；用滑桿、滾輪或雙指縮放，縮小可放進整張照片。</p><canvas id="crop" width="400" height="400" tabindex="0" aria-label="照片裁切預覽。拖曳或方向鍵移動照片，滾輪、雙指或加減鍵縮放。"></canvas><label class="zoom-label">縮放 <input id="zoom" type="range" min="0.2" max="5" step="0.01" value="1"><span id="zoom-value">1.0×</span></label><div class="crop-actions"><button class="secondary" id="crop-replace">換一張照片</button><button class="primary" id="crop-apply">套用這個圈選 →</button></div><p class="crop-note" id="crop-note"></p></dialog>
 <dialog id="confirm-modal"><h2 id="confirm-title">重新開始？</h2><p id="confirm-desc">目前的分數會歸零，你的照片素材會保留。</p><div class="crop-actions"><button class="secondary" id="confirm-cancel">取消</button><button class="primary" id="confirm-ok">重新開始</button></div></dialog>
 <div id="toast" role="status" class="toast" hidden></div>
 </body></html>
