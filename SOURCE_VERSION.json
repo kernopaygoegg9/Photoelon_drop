@@ -5,15 +5,15 @@
   "files": [
     {
       "path": "dist/app.js",
-      "sha256": "bdaeb8337f764bbdef658bbd1ec87c712b15c4eba608a47017520dee37b81f94"
+      "sha256": "926e55db9f7ec4c76eaa77dc9f74a11e38db008170c129a25e054dd65e45a91f"
     },
     {
       "path": "dist/game.js",
-      "sha256": "eec01f42ccb9222556e071788cd55cd80966b2ea614191c12bc792d242dc1b34"
+      "sha256": "c4579e28cd3f59103e6fc7dcd2234c18aff98a9aa90f2d1271c7804a60df2418"
     },
     {
       "path": "dist/index.html",
-      "sha256": "d1921253d1bfcc0c8b55a1004719fdd7c4ee3680fe1fe3e1579cc35deb564ddb"
+      "sha256": "ca2dde09382506f96618da4ac977fc26fae58790a078b24e129dc31c3a34b431"
     },
     {
       "path": "dist/style.css",
@@ -29,7 +29,7 @@
     },
     {
       "path": "tests/physics.cjs",
-      "sha256": "b896d0a0d31a2bf02c3e5f50185fa97cd60ecf800b8c772c807f9504f45b4fa4"
+      "sha256": "a700eae0f7c62a276c1f04ef61e2d0d32e732ec5a70b5eaec5db22bdb82ed735"
     }
   ]
 }
